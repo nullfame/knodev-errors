@@ -33,6 +33,7 @@
     "sort-package-json": "^1.50.0"
   },
   "dependencies": {
+    "@knowdev/log": "^0.1.0",
     "jsonapi-serializer": "^3.6.7"
   }
 }
