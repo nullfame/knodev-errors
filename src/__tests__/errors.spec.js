@@ -1,5 +1,6 @@
+const HTTP = require("@knowdev/http");
 const JsonApiSerializer = require("jsonapi-serializer");
-const { HTTP } = require("../lib/http");
+
 const {
   ERROR,
   formatError,

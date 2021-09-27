@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
+const HTTP = require("@knowdev/http");
 const log = require("@knowdev/log");
 const JsonApiSerializer = require("jsonapi-serializer");
-const { HTTP } = require("./lib/http");
 
 //
 //
