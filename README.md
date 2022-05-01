@@ -33,6 +33,14 @@ try {
 }
 ```
 
+### Format Error
+
+``` javascript
+if(error.isProjectError) {
+  return error.json();
+}
+```
+
 ### Multi-Error Usage
 
 ``` javascript
@@ -65,6 +73,7 @@ throw MultiError(errors);
 ## 📝 Changelog
 
 * v1.0.0 - First release
+* v1.1.0 - Add `json()` formatting function
 
 ## 🛣 Roadmap
 

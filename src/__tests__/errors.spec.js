@@ -1,13 +1,8 @@
 const HTTP = require("@knowdev/http");
 const JsonApiSerializer = require("jsonapi-serializer");
 
-const {
-  ERROR,
-  formatError,
-  NAME,
-  ProjectError,
-  ProjectMultiError,
-} = require("../errors");
+const { ERROR, NAME, ProjectError, ProjectMultiError } = require("../errors");
+const formatError = require("../formatError");
 
 //
 //
@@ -57,6 +52,10 @@ describe("JSON:API HTTP Error", () => {
   it("Has isProjectError", () => {
     const error = new ProjectError();
     expect(error.isProjectError).toBeTrue();
+  });
+  it("Has json", () => {
+    const error = new ProjectError();
+    expect(error.json()).toBeObject();
   });
   it("Defaults to internal error", () => {
     const error = new ProjectError();

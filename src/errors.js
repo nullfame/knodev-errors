@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 const HTTP = require("@knowdev/http");
 const log = require("@knowdev/log");
-const JsonApiSerializer = require("jsonapi-serializer");
+const formatError = require("./formatError");
 
 //
 //
@@ -68,6 +68,12 @@ class ProjectError extends Error {
     this.status = status;
     this.name = NAME;
     this.isProjectError = true;
+    this.json = () => {
+      // eslint-disable-next-line no-shadow
+      const { data, status } = formatError(this);
+      this.status = status;
+      return data;
+    };
   }
 }
 
@@ -175,54 +181,6 @@ const UnreachableCodeError = (message = ERROR.MESSAGE.UNREACHABLE_CODE) => {
     status: HTTP.CODE.INTERNAL_ERROR,
     title: ERROR.TITLE.INTERNAL_ERROR,
   });
-};
-
-//
-//
-// Private Functions
-//
-
-function isMultiError(error) {
-  return error instanceof ProjectMultiError;
-}
-
-//
-//
-// Public Functions
-//
-
-const formatError = (error) => {
-  if (!error.isProjectError) throw error;
-
-  let errors = [error];
-  if (isMultiError(error)) {
-    errors = error.errors;
-  }
-
-  const errorArray = [];
-  let { status } = errors[0];
-  errors.forEach((e) => {
-    // If the errors aren't the same use a generic error
-    if (status !== e.status) {
-      // If they are both 4XX, use Bad Request
-      if (Math.floor(status / 100) === 4 && Math.floor(e.status / 100) === 4) {
-        status = HTTP.CODE.BAD_REQUEST;
-      } else {
-        // Otherwise, use internal server error
-        status = HTTP.CODE.INTERNAL_ERROR;
-      }
-    }
-
-    // Format the error
-    const formatted = new JsonApiSerializer.Error(e);
-    // But only pluck out the inner part of the array
-    errorArray.push(formatted.errors[0]);
-  });
-
-  return {
-    status,
-    data: { errors: errorArray },
-  };
 };
 
 //
