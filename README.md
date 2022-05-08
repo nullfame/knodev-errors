@@ -60,6 +60,7 @@ throw MultiError(errors);
 | ForbiddenError        | 403    |
 | GatewayTimeoutError   | 504    |
 | GoneError             | 410    |
+| IllogicalError        | 500    |
 | InternalError         | 500    |
 | MethodNotAllowedError | 405    |
 | MultiError            | Varies |
@@ -68,12 +69,14 @@ throw MultiError(errors);
 | RejectedError         | 403    |
 | TeapotError           | 418    |
 | UnavailableError      | 503    |
+| UnhandledError        | 500    |
 | UnreachableCodeError  | 500    |
 
 ## 📝 Changelog
 
 * v1.0.0 - First release
 * v1.1.0 - Add `json()` formatting function
+* v1.2.0 - Add `IllogicalError`, `UnhandledError`
 
 ## 🛣 Roadmap
 

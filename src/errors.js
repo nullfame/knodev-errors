@@ -20,6 +20,8 @@ const ERROR = {
     GATEWAY_TIMEOUT:
       "The connection timed out waiting for an upstream resource",
     GONE: "The requested resource is no longer available",
+    ILLOGICAL:
+      "The application encountered an illogical condition while processing the request",
     INTERNAL_ERROR:
       "An unexpected error occurred and the request was unable to complete",
     METHOD_NOT_ALLOWED: "The requested method is not allowed",
@@ -29,6 +31,8 @@ const ERROR = {
     REJECTED: "The request was rejected prior to processing",
     TEAPOT: "This resource is a teapot incapable of processing the request",
     UNAVAILABLE: "The requested resource is temporarily unavailable",
+    UNHANDLED:
+      "An unhandled error occurred and the request was unable to complete",
     UNREACHABLE_CODE:
       "The application encountered an unreachable condition while processing the request",
   },
@@ -161,6 +165,14 @@ const ConfigurationError = (message = ERROR.MESSAGE.CONFIGURATION_ERROR) =>
     title: ERROR.TITLE.CONFIGURATION_ERROR,
   });
 
+const IllogicalError = (message = ERROR.MESSAGE.ILLOGICAL) => {
+  log.warn("Encountered illogical code block");
+  return new ProjectError(message, {
+    status: HTTP.CODE.INTERNAL_ERROR,
+    title: ERROR.TITLE.INTERNAL_ERROR,
+  });
+};
+
 const MultiError = (errors) => new ProjectMultiError(errors);
 
 const RejectedError = (message = ERROR.MESSAGE.REJECTED) =>
@@ -174,6 +186,14 @@ const NotImplementedError = (message = ERROR.MESSAGE.NOT_IMPLEMENTED) =>
     status: HTTP.CODE.BAD_REQUEST,
     title: ERROR.TITLE.NOT_IMPLEMENTED,
   });
+
+const UnhandledError = (message = ERROR.MESSAGE.UNHANDLED) => {
+  log.warn("Caught unhandled error");
+  return new ProjectError(message, {
+    status: HTTP.CODE.INTERNAL_ERROR,
+    title: ERROR.TITLE.INTERNAL_ERROR,
+  });
+};
 
 const UnreachableCodeError = (message = ERROR.MESSAGE.UNREACHABLE_CODE) => {
   log.warn("Encountered unreachable code block");
@@ -197,6 +217,7 @@ module.exports = {
   formatError,
   GatewayTimeoutError,
   GoneError,
+  IllogicalError,
   InternalError,
   MethodNotAllowedError,
   MultiError,
@@ -208,5 +229,6 @@ module.exports = {
   RejectedError,
   TeapotError,
   UnavailableError,
+  UnhandledError,
   UnreachableCodeError,
 };
