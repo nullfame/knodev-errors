@@ -284,7 +284,7 @@ const NotImplementedError = new Proxy(
 const UnhandledError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNHANDLED) {
-      log.warn("Encountered illogical code block");
+      log.warn("Caught unhandled error");
       return new ProjectError(message, {
         status: HTTP.CODE.INTERNAL_ERROR,
         title: ERROR.TITLE.INTERNAL_ERROR,
@@ -297,7 +297,7 @@ const UnhandledError = new Proxy(
 const UnreachableCodeError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNREACHABLE_CODE) {
-      log.warn("Encountered illogical code block");
+      log.warn("Encountered unreachable code block");
       return new ProjectError(message, {
         status: HTTP.CODE.INTERNAL_ERROR,
         title: ERROR.TITLE.INTERNAL_ERROR,
