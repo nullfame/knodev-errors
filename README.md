@@ -77,6 +77,7 @@ throw MultiError(errors);
 * v1.0.0 - First release
 * v1.1.0 - Add `json()` formatting function
 * v1.2.0 - Add `IllogicalError`, `UnhandledError`
+* v1.3.0 - Can be constructed with or without `new` keyword
 
 ## 🛣 Roadmap
 

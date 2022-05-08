@@ -5,6 +5,17 @@ const formatError = require("./formatError");
 
 //
 //
+// Helpers
+//
+
+const proxyClassAsFunction = {
+  apply: (target, thisArgument, argumentsList) =>
+    // eslint-disable-next-line new-cap
+    new target(...argumentsList),
+};
+
+//
+//
 // Constants
 //
 
@@ -97,111 +108,204 @@ class ProjectMultiError extends Error {
 
 // Standard HTTP
 
-const BadGatewayError = (message = ERROR.MESSAGE.BAD_GATEWAY) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.BAD_GATEWAY,
-    title: ERROR.TITLE.BAD_GATEWAY,
-  });
+const BadGatewayError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.BAD_GATEWAY) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.BAD_GATEWAY,
+        title: ERROR.TITLE.BAD_GATEWAY,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const BadRequestError = (message = ERROR.MESSAGE.BAD_REQUEST) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.BAD_REQUEST,
-    title: ERROR.TITLE.BAD_REQUEST,
-  });
+const BadRequestError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.BAD_REQUEST) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.BAD_REQUEST,
+        title: ERROR.TITLE.BAD_REQUEST,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const ForbiddenError = (message = ERROR.MESSAGE.FORBIDDEN) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.FORBIDDEN,
-    title: ERROR.TITLE.FORBIDDEN,
-  });
+const ForbiddenError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.FORBIDDEN) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.FORBIDDEN,
+        title: ERROR.TITLE.FORBIDDEN,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const GatewayTimeoutError = (message = ERROR.MESSAGE.GATEWAY_TIMEOUT) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.GATEWAY_TIMEOUT,
-    title: ERROR.TITLE.GATEWAY_TIMEOUT,
-  });
+const GatewayTimeoutError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.GATEWAY_TIMEOUT) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.GATEWAY_TIMEOUT,
+        title: ERROR.TITLE.GATEWAY_TIMEOUT,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const GoneError = (message = ERROR.MESSAGE.GONE) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.GONE,
-    title: ERROR.TITLE.GONE,
-  });
+const GoneError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.GONE) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.GONE,
+        title: ERROR.TITLE.GONE,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const InternalError = (message = ERROR.MESSAGE.INTERNAL_ERROR) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.INTERNAL_ERROR,
-    title: ERROR.TITLE.INTERNAL_ERROR,
-  });
+const InternalError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.INTERNAL_ERROR) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.INTERNAL_ERROR,
+        title: ERROR.TITLE.INTERNAL_ERROR,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const MethodNotAllowedError = (message = ERROR.MESSAGE.METHOD_NOT_ALLOWED) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.METHOD_NOT_ALLOWED,
-    title: ERROR.TITLE.METHOD_NOT_ALLOWED,
-  });
+const MethodNotAllowedError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.METHOD_NOT_ALLOWED) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.METHOD_NOT_ALLOWED,
+        title: ERROR.TITLE.METHOD_NOT_ALLOWED,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const NotFoundError = (message = ERROR.MESSAGE.NOT_FOUND) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.NOT_FOUND,
-    title: ERROR.TITLE.NOT_FOUND,
-  });
+const NotFoundError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.NOT_FOUND) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.NOT_FOUND,
+        title: ERROR.TITLE.NOT_FOUND,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const TeapotError = (message = ERROR.MESSAGE.TEAPOT) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.TEAPOT,
-    title: ERROR.TITLE.TEAPOT,
-  });
+const TeapotError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.TEAPOT) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.TEAPOT,
+        title: ERROR.TITLE.TEAPOT,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const UnavailableError = (message = ERROR.MESSAGE.UNAVAILABLE) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.UNAVAILABLE,
-    title: ERROR.TITLE.UNAVAILABLE,
-  });
+const UnavailableError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.UNAVAILABLE) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.UNAVAILABLE,
+        title: ERROR.TITLE.UNAVAILABLE,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
 // Special Errors
 
-const ConfigurationError = (message = ERROR.MESSAGE.CONFIGURATION_ERROR) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.INTERNAL_ERROR,
-    title: ERROR.TITLE.CONFIGURATION_ERROR,
-  });
+const ConfigurationError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.CONFIGURATION_ERROR) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.INTERNAL_ERROR,
+        title: ERROR.TITLE.CONFIGURATION_ERROR,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const IllogicalError = (message = ERROR.MESSAGE.ILLOGICAL) => {
-  log.warn("Encountered illogical code block");
-  return new ProjectError(message, {
-    status: HTTP.CODE.INTERNAL_ERROR,
-    title: ERROR.TITLE.INTERNAL_ERROR,
-  });
-};
+const IllogicalError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.ILLOGICAL) {
+      log.warn("Encountered illogical code block");
+      return new ProjectError(message, {
+        status: HTTP.CODE.INTERNAL_ERROR,
+        title: ERROR.TITLE.INTERNAL_ERROR,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
 const MultiError = (errors) => new ProjectMultiError(errors);
 
-const RejectedError = (message = ERROR.MESSAGE.REJECTED) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.FORBIDDEN,
-    title: ERROR.TITLE.REJECTED,
-  });
+const RejectedError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.REJECTED) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.FORBIDDEN,
+        title: ERROR.TITLE.REJECTED,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const NotImplementedError = (message = ERROR.MESSAGE.NOT_IMPLEMENTED) =>
-  new ProjectError(message, {
-    status: HTTP.CODE.BAD_REQUEST,
-    title: ERROR.TITLE.NOT_IMPLEMENTED,
-  });
+const NotImplementedError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.NOT_IMPLEMENTED) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.BAD_REQUEST,
+        title: ERROR.TITLE.NOT_IMPLEMENTED,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const UnhandledError = (message = ERROR.MESSAGE.UNHANDLED) => {
-  log.warn("Caught unhandled error");
-  return new ProjectError(message, {
-    status: HTTP.CODE.INTERNAL_ERROR,
-    title: ERROR.TITLE.INTERNAL_ERROR,
-  });
-};
+const UnhandledError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.UNHANDLED) {
+      log.warn("Encountered illogical code block");
+      return new ProjectError(message, {
+        status: HTTP.CODE.INTERNAL_ERROR,
+        title: ERROR.TITLE.INTERNAL_ERROR,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
-const UnreachableCodeError = (message = ERROR.MESSAGE.UNREACHABLE_CODE) => {
-  log.warn("Encountered unreachable code block");
-  return new ProjectError(message, {
-    status: HTTP.CODE.INTERNAL_ERROR,
-    title: ERROR.TITLE.INTERNAL_ERROR,
-  });
-};
+const UnreachableCodeError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.UNREACHABLE_CODE) {
+      log.warn("Encountered illogical code block");
+      return new ProjectError(message, {
+        status: HTTP.CODE.INTERNAL_ERROR,
+        title: ERROR.TITLE.INTERNAL_ERROR,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
 
 //
 //

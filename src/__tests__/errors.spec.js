@@ -1,7 +1,13 @@
 const HTTP = require("@knowdev/http");
 const JsonApiSerializer = require("jsonapi-serializer");
 
-const { ERROR, NAME, ProjectError, ProjectMultiError } = require("../errors");
+const {
+  ERROR,
+  NAME,
+  UnreachableCodeError,
+  ProjectError,
+  ProjectMultiError,
+} = require("../errors");
 const formatError = require("../formatError");
 
 //
@@ -74,6 +80,25 @@ describe("JSON:API HTTP Error", () => {
   it("Allows custom title", () => {
     const error = new ProjectError(undefined, { title: MOCK.TITLE });
     expect(error.title).toBe(MOCK.TITLE);
+  });
+
+  describe("Throwing with new", () => {
+    it("Works with new", () => {
+      try {
+        throw new UnreachableCodeError();
+      } catch (error) {
+        expect(error.isProjectError).toBeTrue();
+      }
+      expect.assertions(1);
+    });
+    it("Works without new", () => {
+      try {
+        throw UnreachableCodeError();
+      } catch (error) {
+        expect(error.isProjectError).toBeTrue();
+      }
+      expect.assertions(1);
+    });
   });
 
   describe("Formatting Errors", () => {
