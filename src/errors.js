@@ -41,6 +41,8 @@ const ERROR = {
       "The request was understood but the resource is not implemented",
     REJECTED: "The request was rejected prior to processing",
     TEAPOT: "This resource is a teapot incapable of processing the request",
+    UNAUTHORIZED:
+      "The request did not include valid authentication credentials",
     UNAVAILABLE: "The requested resource is temporarily unavailable",
     UNHANDLED:
       "An unhandled error occurred and the request was unable to complete",
@@ -60,6 +62,7 @@ const ERROR = {
     NOT_IMPLEMENTED: "Not Implemented",
     REJECTED: "Request Rejected",
     TEAPOT: "Teapot",
+    UNAUTHORIZED: "Service Unauthorized",
     UNAVAILABLE: "Service Unavailable",
   },
 };
@@ -216,6 +219,18 @@ const TeapotError = new Proxy(
   proxyClassAsFunction
 );
 
+const UnauthorizedError = new Proxy(
+  class {
+    constructor(message = ERROR.MESSAGE.UNAUTHORIZED) {
+      return new ProjectError(message, {
+        status: HTTP.CODE.UNAUTHORIZED,
+        title: ERROR.TITLE.UNAUTHORIZED,
+      });
+    }
+  },
+  proxyClassAsFunction
+);
+
 const UnavailableError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNAVAILABLE) {
@@ -332,6 +347,7 @@ module.exports = {
   ProjectMultiError,
   RejectedError,
   TeapotError,
+  UnauthorizedError,
   UnavailableError,
   UnhandledError,
   UnreachableCodeError,
