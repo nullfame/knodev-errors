@@ -5,26 +5,22 @@
   "license": "UNLICENSED",
   "author": "Adam Finlayson",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "clean": "npm run test:clean",
     "format": "sort-package-json && eslint --fix",
-    "lint": "eslint",
-    "test": "jest src/",
-    "test:clean": "rimraf coverage/",
-    "test:coverage": "jest --coverage src/",
-    "test:spec:errors": "jest ./src/__tests__/errors.spec.js"
+    "lint": "eslint .",
+    "test": "vitest .",
+    "test:spec:errors": "vitest run ./src/__tests__/errors.spec.js"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.0",
-    "eslint-plugin-jest": "^24.4.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^7.0.1",
     "hygen": "^6.1.0",
-    "jest": "^27.0.6",
-    "jest-extended": "^0.11.5",
+    "jest-extended": "^4.0.2",
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
     "rimraf": "^3.0.2",
@@ -33,6 +29,8 @@
   "dependencies": {
     "@knowdev/http": "^1.1.2",
     "@knowdev/log": "^0.1.0",
-    "jsonapi-serializer": "^3.6.7"
+    "eslint-plugin-jest": "^27.6.3",
+    "jsonapi-serializer": "^3.6.7",
+    "vitest": "^1.2.1"
   }
 }

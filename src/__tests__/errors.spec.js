@@ -1,14 +1,16 @@
-const HTTP = require("@knowdev/http");
-const JsonApiSerializer = require("jsonapi-serializer");
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-const {
+import HTTP from "@knowdev/http";
+import JsonApiSerializer from "jsonapi-serializer";
+
+import {
   ERROR,
   NAME,
   UnreachableCodeError,
   ProjectError,
   ProjectMultiError,
-} = require("../errors");
-const formatError = require("../formatError");
+} from "../errors.js";
+import formatError from "../formatError.js";
 
 //
 //

@@ -1,29 +1,14 @@
-import errors from "./errors";
+import errors from "./errors.js";
 
-export default errors;
+const exportErrors = {
+  ...errors,
+};
+delete exportErrors.ERROR;
+delete exportErrors.formatError;
+delete exportErrors.NAME;
+delete exportErrors.ProjectError;
+delete exportErrors.ProjectMultiError;
 
-export const {
-  BadGatewayError,
-  BadRequestError,
-  ConfigurationError,
-  // ERROR, // Intentionally not part of the public API
-  ForbiddenError,
-  // formatError, // Intentionally not part of the public API
-  GatewayTimeoutError,
-  GoneError,
-  IllogicalError,
-  InternalError,
-  MethodNotAllowedError,
-  MultiError,
-  // NAME, // Intentionally not part of the public API
-  NotFoundError,
-  NotImplementedError,
-  // ProjectError, // Intentionally not part of the public API
-  // ProjectMultiError, // Intentionally not part of the public API
-  RejectedError,
-  TeapotError,
-  UnauthorizedError,
-  UnavailableError,
-  UnhandledError,
-  UnreachableCodeError,
-} = errors;
+export default exportErrors;
+
+export * from "./errors.js";
