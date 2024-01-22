@@ -79,7 +79,7 @@ throw MultiError(errors);
 * v1.2.0 - Add `IllogicalError`, `UnhandledError`
 * v1.3.0 - Can be constructed with or without `new` keyword
 * v1.4.0 - Add `UnauthorizedError`
-* v1.4.1 - Module syntax compatibility
+* v1.4.5 - Fixes versions 1.4.1 - 1.4.4
 
 ## 🛣 Roadmap
 
