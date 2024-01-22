@@ -1,5 +1,5 @@
-const HTTP = require("@knowdev/http");
-const JsonApiSerializer = require("jsonapi-serializer");
+import HTTP from "@knowdev/http";
+import JsonApiSerializer from "jsonapi-serializer";
 
 //
 //
@@ -54,4 +54,4 @@ const formatError = (error) => {
 // Export
 //
 
-module.exports = formatError;
+export default formatError;

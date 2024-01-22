@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
-const HTTP = require("@knowdev/http");
-const log = require("@knowdev/log");
-const formatError = require("./formatError");
+import HTTP from "@knowdev/http";
+import log from "@knowdev/log";
+import formatError from "./formatError.js";
 
 //
 //
@@ -19,9 +19,9 @@ const proxyClassAsFunction = {
 // Constants
 //
 
-const NAME = "ProjectError";
+export const NAME = "ProjectError";
 
-const ERROR = {
+export const ERROR = {
   MESSAGE: {
     BAD_GATEWAY: "An unexpected error occurred on an upstream resource",
     BAD_REQUEST: "The request was not properly formatted",
@@ -72,7 +72,7 @@ const ERROR = {
 // Public Classes
 //
 
-class ProjectError extends Error {
+export class ProjectError extends Error {
   constructor(
     message = ERROR.MESSAGE.INTERNAL_ERROR,
     {
@@ -95,7 +95,7 @@ class ProjectError extends Error {
   }
 }
 
-class ProjectMultiError extends Error {
+export class ProjectMultiError extends Error {
   constructor(errors = []) {
     super();
     this.errors = errors;
@@ -111,7 +111,7 @@ class ProjectMultiError extends Error {
 
 // Standard HTTP
 
-const BadGatewayError = new Proxy(
+export const BadGatewayError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.BAD_GATEWAY) {
       return new ProjectError(message, {
@@ -123,7 +123,7 @@ const BadGatewayError = new Proxy(
   proxyClassAsFunction
 );
 
-const BadRequestError = new Proxy(
+export const BadRequestError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.BAD_REQUEST) {
       return new ProjectError(message, {
@@ -135,7 +135,7 @@ const BadRequestError = new Proxy(
   proxyClassAsFunction
 );
 
-const ForbiddenError = new Proxy(
+export const ForbiddenError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.FORBIDDEN) {
       return new ProjectError(message, {
@@ -147,7 +147,7 @@ const ForbiddenError = new Proxy(
   proxyClassAsFunction
 );
 
-const GatewayTimeoutError = new Proxy(
+export const GatewayTimeoutError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.GATEWAY_TIMEOUT) {
       return new ProjectError(message, {
@@ -159,7 +159,7 @@ const GatewayTimeoutError = new Proxy(
   proxyClassAsFunction
 );
 
-const GoneError = new Proxy(
+export const GoneError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.GONE) {
       return new ProjectError(message, {
@@ -171,7 +171,7 @@ const GoneError = new Proxy(
   proxyClassAsFunction
 );
 
-const InternalError = new Proxy(
+export const InternalError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.INTERNAL_ERROR) {
       return new ProjectError(message, {
@@ -183,7 +183,7 @@ const InternalError = new Proxy(
   proxyClassAsFunction
 );
 
-const MethodNotAllowedError = new Proxy(
+export const MethodNotAllowedError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.METHOD_NOT_ALLOWED) {
       return new ProjectError(message, {
@@ -195,7 +195,7 @@ const MethodNotAllowedError = new Proxy(
   proxyClassAsFunction
 );
 
-const NotFoundError = new Proxy(
+export const NotFoundError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.NOT_FOUND) {
       return new ProjectError(message, {
@@ -207,7 +207,7 @@ const NotFoundError = new Proxy(
   proxyClassAsFunction
 );
 
-const TeapotError = new Proxy(
+export const TeapotError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.TEAPOT) {
       return new ProjectError(message, {
@@ -219,7 +219,7 @@ const TeapotError = new Proxy(
   proxyClassAsFunction
 );
 
-const UnauthorizedError = new Proxy(
+export const UnauthorizedError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNAUTHORIZED) {
       return new ProjectError(message, {
@@ -231,7 +231,7 @@ const UnauthorizedError = new Proxy(
   proxyClassAsFunction
 );
 
-const UnavailableError = new Proxy(
+export const UnavailableError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNAVAILABLE) {
       return new ProjectError(message, {
@@ -245,7 +245,7 @@ const UnavailableError = new Proxy(
 
 // Special Errors
 
-const ConfigurationError = new Proxy(
+export const ConfigurationError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.CONFIGURATION_ERROR) {
       return new ProjectError(message, {
@@ -257,7 +257,7 @@ const ConfigurationError = new Proxy(
   proxyClassAsFunction
 );
 
-const IllogicalError = new Proxy(
+export const IllogicalError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.ILLOGICAL) {
       log.warn("Encountered illogical code block");
@@ -270,9 +270,9 @@ const IllogicalError = new Proxy(
   proxyClassAsFunction
 );
 
-const MultiError = (errors) => new ProjectMultiError(errors);
+export const MultiError = (errors) => new ProjectMultiError(errors);
 
-const RejectedError = new Proxy(
+export const RejectedError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.REJECTED) {
       return new ProjectError(message, {
@@ -284,7 +284,7 @@ const RejectedError = new Proxy(
   proxyClassAsFunction
 );
 
-const NotImplementedError = new Proxy(
+export const NotImplementedError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.NOT_IMPLEMENTED) {
       return new ProjectError(message, {
@@ -296,7 +296,7 @@ const NotImplementedError = new Proxy(
   proxyClassAsFunction
 );
 
-const UnhandledError = new Proxy(
+export const UnhandledError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNHANDLED) {
       log.warn("Caught unhandled error");
@@ -309,7 +309,7 @@ const UnhandledError = new Proxy(
   proxyClassAsFunction
 );
 
-const UnreachableCodeError = new Proxy(
+export const UnreachableCodeError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNREACHABLE_CODE) {
       log.warn("Encountered unreachable code block");
@@ -327,7 +327,7 @@ const UnreachableCodeError = new Proxy(
 // Export
 //
 
-module.exports = {
+export default {
   BadGatewayError,
   BadRequestError,
   ConfigurationError,
