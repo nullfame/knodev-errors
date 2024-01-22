@@ -6,4 +6,7 @@ delete errors.NAME;
 delete errors.ProjectError;
 delete errors.ProjectMultiError;
 
-module.exports = errors;
+module.exports = {
+  ...errors,
+  default: errors,
+};
