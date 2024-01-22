@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-commonjs
 module.exports = {
   env: {
     es6: true,
@@ -15,6 +16,10 @@ module.exports = {
   },
   plugins: ["jest", "prettier"],
   rules: {
+    "import/extensions": ["error", "ignorePackages"],
+    "import/no-commonjs": "error",
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
     "prettier/prettier": ["error"],
   },
 };
