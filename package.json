@@ -5,14 +5,12 @@
   "license": "UNLICENSED",
   "author": "Adam Finlayson",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "clean": "npm run test:clean",
     "format": "sort-package-json && eslint --fix",
-    "lint": "eslint",
-    "test": "jest src/",
-    "test:clean": "rimraf coverage/",
-    "test:coverage": "jest --coverage src/",
-    "test:spec:errors": "jest ./src/__tests__/errors.spec.js"
+    "lint": "eslint .",
+    "test": "vitest .",
+    "test:spec:errors": "vitest run ./src/__tests__/errors.spec.js"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
