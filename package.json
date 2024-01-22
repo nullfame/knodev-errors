@@ -12,8 +12,7 @@
     "test": "jest src/",
     "test:clean": "rimraf coverage/",
     "test:coverage": "jest --coverage src/",
-    "test:spec:errors": "jest ./src/__tests__/errors.spec.js",
-    "postversion": "npm publish"
+    "test:spec:errors": "jest ./src/__tests__/errors.spec.js"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
