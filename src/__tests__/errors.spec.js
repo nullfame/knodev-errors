@@ -138,7 +138,7 @@ describe("JSON:API HTTP Error", () => {
         expect(test.errors[0]).toEqual(element);
       });
     });
-    it.only("Multi-error JSON:API can be empty", () => {
+    it("Multi-error JSON:API can be empty", () => {
       const error = new ProjectMultiError();
       const response = formatError(error);
 
