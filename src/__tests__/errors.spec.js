@@ -120,6 +120,40 @@ describe("JSON:API HTTP Error", () => {
         expect(test.errors[0]).toEqual(element);
       });
     });
+    it("Multi-error can be formatted as JSON:API", () => {
+      const error1 = new ProjectError();
+      const error2 = new ProjectError();
+      const error = new ProjectMultiError([error1, error2]);
+      const response = formatError(error);
+
+      expect(response.status).toBeNumber();
+      expect(response.status).not.toBeNegative();
+
+      expect(response.data).toBeObject();
+      expect(response.data.errors).toBeArrayOfSize(2);
+
+      // Each element in the errors should parse as a JsonApiError
+      response.data.errors.forEach((element) => {
+        const test = JsonApiSerializer.Error(element);
+        expect(test.errors[0]).toEqual(element);
+      });
+    });
+    it.only("Multi-error JSON:API can be empty", () => {
+      const error = new ProjectMultiError();
+      const response = formatError(error);
+
+      expect(response.status).toBeNumber();
+      expect(response.status).not.toBeNegative();
+
+      expect(response.data).toBeObject();
+      expect(response.data.errors).toBeArrayOfSize(0);
+
+      // Each element in the errors should parse as a JsonApiError
+      response.data.errors.forEach((element) => {
+        const test = JsonApiSerializer.Error(element);
+        expect(test.errors[0]).toEqual(element);
+      });
+    });
     it("Re-throws non-ProjectError", () => {
       try {
         const notProjectError = Error();

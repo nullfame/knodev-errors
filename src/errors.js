@@ -101,6 +101,12 @@ export class ProjectMultiError extends Error {
     this.errors = errors;
     this.name = NAME;
     this.isProjectError = true;
+    this.json = () => {
+      // eslint-disable-next-line no-shadow
+      const { data, status } = formatError(this);
+      this.status = status;
+      return data;
+    };
   }
 }
 
