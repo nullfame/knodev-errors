@@ -80,6 +80,7 @@ throw MultiError(errors);
 * v1.3.0 - Can be constructed with or without `new` keyword
 * v1.4.0 - Add `UnauthorizedError`
 * v1.4.1 - Module syntax compatibility
+* v2.0.0 - Module syntax exclusivity
 
 ## 🛣 Roadmap
 
