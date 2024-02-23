@@ -1,6 +1,6 @@
 {
   "name": "@knowdev/errors",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "JSON:API-complaint errors",
   "license": "UNLICENSED",
   "author": "Adam Finlayson",
