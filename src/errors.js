@@ -101,10 +101,11 @@ export class ProjectMultiError extends Error {
     this.errors = errors;
     this.name = NAME;
     this.isProjectError = true;
+    const { status } = formatError(this);
+    this.status = status;
     this.json = () => {
       // eslint-disable-next-line no-shadow
-      const { data, status } = formatError(this);
-      this.status = status;
+      const { data } = formatError(this);
       return data;
     };
   }

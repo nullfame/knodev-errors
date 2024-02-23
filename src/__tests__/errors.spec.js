@@ -247,5 +247,15 @@ describe("JSON:API HTTP Error", () => {
       const response = formatError(error);
       expect(response.status).toBe(HTTP.CODE.INTERNAL_ERROR);
     });
+    it("Provides a status", () => {
+      const error1 = new ProjectError();
+      const error2 = new ProjectError();
+      const error = new ProjectMultiError([error1, error2]);
+      const response = formatError(error);
+      expect(response.status).toBeNumber();
+      expect(error1.status).toBeNumber();
+      expect(error2.status).toBeNumber();
+      expect(error.status).toBeNumber();
+    });
   });
 });
