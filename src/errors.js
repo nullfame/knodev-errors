@@ -1,6 +1,5 @@
 /* eslint-disable max-classes-per-file */
 import HTTP from "@knowdev/http";
-import log from "@knowdev/log";
 import formatError from "./formatError.js";
 
 //
@@ -267,7 +266,6 @@ export const ConfigurationError = new Proxy(
 export const IllogicalError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.ILLOGICAL) {
-      log.warn("Encountered illogical code block");
       return new ProjectError(message, {
         status: HTTP.CODE.INTERNAL_ERROR,
         title: ERROR.TITLE.INTERNAL_ERROR,
@@ -306,7 +304,6 @@ export const NotImplementedError = new Proxy(
 export const UnhandledError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNHANDLED) {
-      log.warn("Caught unhandled error");
       return new ProjectError(message, {
         status: HTTP.CODE.INTERNAL_ERROR,
         title: ERROR.TITLE.INTERNAL_ERROR,
@@ -319,7 +316,6 @@ export const UnhandledError = new Proxy(
 export const UnreachableCodeError = new Proxy(
   class {
     constructor(message = ERROR.MESSAGE.UNREACHABLE_CODE) {
-      log.warn("Encountered unreachable code block");
       return new ProjectError(message, {
         status: HTTP.CODE.INTERNAL_ERROR,
         title: ERROR.TITLE.INTERNAL_ERROR,
