@@ -275,7 +275,7 @@ export const IllogicalError = new Proxy(
   proxyClassAsFunction
 );
 
-export const MultiError = (errors) => new ProjectMultiError(errors);
+export const MultiError = ProjectMultiError;
 
 export const RejectedError = new Proxy(
   class {

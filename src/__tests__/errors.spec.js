@@ -6,6 +6,7 @@ import JsonApiSerializer from "jsonapi-serializer";
 import {
   ERROR,
   NAME,
+  MultiError,
   UnreachableCodeError,
   ProjectError,
   ProjectMultiError,
@@ -256,6 +257,17 @@ describe("JSON:API HTTP Error", () => {
       expect(error1.status).toBeNumber();
       expect(error2.status).toBeNumber();
       expect(error.status).toBeNumber();
+    });
+    it("Multi-error alias", () => {
+      const error1 = new ProjectError(undefined, {
+        status: HTTP.CODE.NOT_FOUND,
+      });
+      const error2 = new ProjectError(undefined, {
+        status: HTTP.CODE.FORBIDDEN,
+      });
+      const error = new MultiError([error1, error2]);
+      const response = formatError(error);
+      expect(response.status).toBe(HTTP.CODE.BAD_REQUEST);
     });
   });
 });
